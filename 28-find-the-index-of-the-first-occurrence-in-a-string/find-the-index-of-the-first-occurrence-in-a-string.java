@@ -1,19 +1,59 @@
 class Solution {
     public int strStr(String haystack, String needle) {
 
-        int n = haystack.length();
-        int m = needle.length();
+        if (needle.length() == 0) return 0;
 
-        for (int i = 0; i <= n - m; i++) {
-            int j = 0;
+        int[] lps = buildLPS(needle);
 
-            while (j < m && haystack.charAt(i + j) == needle.charAt(j)) {
+        int i = 0; // haystack pointer
+        int j = 0; // needle pointer
+
+        while (i < haystack.length()) {
+
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                i++;
                 j++;
             }
 
-            if (j == m) return i;   
+            if (j == needle.length()) {
+                return i - j;   // match found
+            }
+
+            else if (i < haystack.length() &&
+                    haystack.charAt(i) != needle.charAt(j)) {
+
+                if (j != 0)
+                    j = lps[j - 1];   // jump using LPS
+                else
+                    i++;
+            }
         }
 
         return -1;
+    }
+
+    private int[] buildLPS(String pat) {
+
+        int[] lps = new int[pat.length()];
+        int len = 0;
+        int i = 1;
+
+        while (i < pat.length()) {
+
+            if (pat.charAt(i) == pat.charAt(len)) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len != 0)
+                    len = lps[len - 1];
+                else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+
+        return lps;
     }
 }
