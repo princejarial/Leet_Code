@@ -5,8 +5,8 @@ class Solution {
 
         int[] lps = buildLPS(needle);
 
-        int i = 0; // haystack pointer
-        int j = 0; // needle pointer
+        int i = 0; 
+        int j = 0; 
 
         while (i < haystack.length()) {
 
@@ -16,14 +16,14 @@ class Solution {
             }
 
             if (j == needle.length()) {
-                return i - j;   // match found
+                return i - j;  
             }
 
             else if (i < haystack.length() &&
                     haystack.charAt(i) != needle.charAt(j)) {
 
                 if (j != 0)
-                    j = lps[j - 1];   // jump using LPS
+                    j = lps[j - 1];   
                 else
                     i++;
             }
