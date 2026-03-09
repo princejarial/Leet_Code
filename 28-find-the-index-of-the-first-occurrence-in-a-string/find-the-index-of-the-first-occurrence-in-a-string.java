@@ -11,9 +11,9 @@ class Solution {
                 j++;
             }
 
-            if (j == m) return i;   // match found
+            if (j == m) return i;   
         }
 
-        return -1; // not found
+        return -1; 
     }
 }
