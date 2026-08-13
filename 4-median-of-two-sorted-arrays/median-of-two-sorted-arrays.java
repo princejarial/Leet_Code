@@ -19,7 +19,5 @@ class Solution {
         } else {
             return (list.get(n / 2 - 1) + list.get(n / 2)) / 2.0;
         }
-
-
     }
 }
